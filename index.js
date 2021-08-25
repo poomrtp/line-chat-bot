@@ -3,6 +3,7 @@
 const line = require('@line/bot-sdk')
 const express = require('express')
 const axios = require('axios')
+const cors = require('cors')
 
 // create LINE SDK config from env variables
 const config = {
@@ -13,61 +14,23 @@ const config = {
 
 // create LINE SDK client
 const client = new line.Client(config)
+// Poom userID
+const userId = 'U13945b1db404eb0a165c89443456c4dd'
 
 // create Express app
 // about Express itself: https://expressjs.com/
 const app = express()
+app.use(cors());
 
 // register a webhook handler with middleware
 // about the middleware, please refer to doc
 app.post('/callback', line.middleware(config), (req, res) => {
-  console.log(req)
-  
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
       console.error(err)
       res.status(500).end()
     })
-})
-app.post('/api/send-notify', (req, res) => {
-  // console.log('req', req.body)
-  const textData = Object.keys(req.body).toString()
-  console.log(textData)
-  // axios({
-  //   method: "post",
-  //   url: "https://notify-api.line.me/api/notify",
-  //   headers: {
-  //     Authorization: "Bearer Wv6BxfBndxJjDBShK88fuswUUJMybpoJzfJkbPa77zp",
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //   },
-  //   data: queryString.stringify({
-  //     message: textData,
-  //   }),
-  // }).then((data) => {
-  //  console.log(data)
-  // })
-}),
-app.post('/send-message', (req, res) => {
-  const textData = Object.keys(req.body).toString()
-  console.log(textData)
-  // try {
-  //   axios({
-  //     method: "post",
-  //     url: "https://notify-api.line.me/api/notify",
-  //     headers: {
-  //       Authorization: "Bearer Wv6BxfBndxJjDBShK88fuswUUJMybpoJzfJkbPa77zp",
-  //       "Content-Type": "application/x-www-form-urlencoded",
-  //     },
-  //     data: queryString.stringify({
-  //       message: textData,
-  //     }),
-  //   }).then((data) => {
-  //    console.log(data)
-  //   })
-  // } catch (err) {
-    
-  // }
 })
 
 // event handler
@@ -83,6 +46,7 @@ function handleEvent(event) {
 
   // use reply API
   return client.replyMessage(event.replyToken, echo)
+  // return client.pushMessage(userId, echo)
 }
 
 // listen on port

@@ -8,7 +8,7 @@ const cors = require('cors')
 // create LINE SDK config from env variables
 const config = {
   channelAccessToken:
-    'tetl1NRl/1ump3bra4CmKSUx46jkjDZtlzzopBByP7o//wuavk66gOj/te/la9sr+A8rQhgxhlH/8+OjsAp4jLHYaQR+uybN2wQNEblDU3YKrjOIvA1VRghmuXWfYmZ5aGPkaR4m154DGDMNJoMi5QdB04t89/1O/w1cDnyilFU=',
+    '7aeza+0sKdFlVeZDeity5pDMI+RlJdx2E3Caa3IQ1CgKuLeugHCJ01iMOAGce3pi+A8rQhgxhlH/8+OjsAp4jLHYaQR+uybN2wQNEblDU3ZEI3JTVC5hXJNuz6FAPtSpqdbAO96Vt6CutVMnBBqHMwdB04t89/1O/w1cDnyilFU=',
   channelSecret: '852cc5085c7278c6c46faaddca020dff'
 }
 
